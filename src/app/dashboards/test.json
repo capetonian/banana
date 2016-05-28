@@ -32,189 +32,205 @@
       "ids": []
     }
   },
-  "rows": [{
-    "title": "Query",
-    "height": "50px",
-    "editable": true,
-    "collapse": false,
-    "collapsable": true,
-    "panels": [{
-      "error": false,
-      "span": 9,
+  "rows": [
+    {
+      "title": "Query",
+      "height": "50px",
       "editable": true,
-      "group": [
-        "default"
-      ],
-      "type": "query",
-      "label": "Search",
-      "history": [],
-      "remember": 10,
-      "pinned": true,
-      "query": "*",
-      "title": "Search",
-      "spyable": true,
-      "def_type": ""
-    }, {
-      "span": 3,
+      "collapse": false,
+      "collapsable": true,
+      "panels": [
+        {
+          "error": false,
+          "span": 9,
+          "editable": true,
+          "group": [
+            "default"
+          ],
+          "type": "query",
+          "label": "Search",
+          "history": [],
+          "remember": 10,
+          "pinned": true,
+          "query": "*",
+          "title": "Search",
+          "spyable": true,
+          "def_type": ""
+        },
+        {
+          "span": 3,
+          "editable": true,
+          "type": "hits",
+          "loadingEditor": false,
+          "queries": {
+            "mode": "all",
+            "ids": [
+              0
+            ],
+            "query": "q=*%3A*&stats=true&wt=json&rows=0\n",
+            "basic_query": "",
+            "custom": ""
+          },
+          "style": {
+            "font-size": "14pt"
+          },
+          "arrangement": "horizontal",
+          "chart": "total",
+          "counter_pos": "above",
+          "donut": false,
+          "tilt": false,
+          "labels": true,
+          "spyable": true,
+          "title": "Total Hits",
+          "show_queries": true,
+          "metrics": [
+            {
+              "type": "count",
+              "field": "",
+              "decimalDigits": 2,
+              "label": "",
+              "value": 0
+            }
+          ],
+          "refresh": {
+            "enable": false,
+            "interval": 2
+          }
+        }
+      ]
+    },
+    {
+      "title": "Filter",
+      "height": "150px",
       "editable": true,
-      "type": "hits",
-      "loadingEditor": false,
-      "queries": {
-        "mode": "all",
-        "ids": [
-          0
-        ],
-        "query": "q=*%3A*&stats=true&wt=json&rows=0\n",
-        "basic_query": "",
-        "custom": ""
-      },
-      "style": {
-        "font-size": "14pt"
-      },
-      "arrangement": "horizontal",
-      "chart": "total",
-      "counter_pos": "above",
-      "donut": false,
-      "tilt": false,
-      "labels": true,
-      "spyable": true,
-      "title": "Total Hits",
-      "show_queries": true,
-      "metrics": [{
-        "type": "count",
-        "field": "",
-        "decimalDigits": 2,
-        "label": "",
-        "value": 0
-      }],
-      "refresh": {
-        "enable": false,
-        "interval": 2
-      }
-    }]
-  }, {
-    "title": "Filter",
-    "height": "150px",
-    "editable": true,
-    "collapse": false,
-    "collapsable": true,
-    "panels": [{
-      "error": false,
-      "span": 5,
-      "editable": true,
-      "spyable": true,
-      "group": [
-        "default"
-      ],
-      "type": "filtering"
-    }, {
-      "span": 4,
-      "editable": true,
-      "type": "iframe",
-      "loadingEditor": false,
-      "queries": {
-        "mode": "all",
-        "ids": [
-          0
-        ],
-        "query": "q=*%3A*&stats=true&stats.field=id&stats.field=boost&wt=json&rows=0\n",
-        "basic_query": "",
-        "custom": ""
-      },
-      "style": {
-        "font-size": "10pt"
-      },
-      "arrangement": "horizontal",
-      "chart": "total",
-      "counter_pos": "above",
-      "donut": false,
-      "tilt": false,
-      "labels": true,
-      "spyable": true,
-      "show_queries": true,
-      "IFrameDetails": [{
-        "type": "count",
-        "field": "id",
-        "decimalDigits": 2,
-        "label": "",
-        "value": "52.00",
-        "url": "http://www.iol.co.za"
-      }],
-      "refresh": {
-        "enable": false,
-        "interval": 2
-      },
-      "title": "Test"
-    }]
-  }, {
-    "title": "Events",
-    "height": "250px",
-    "editable": true,
-    "collapse": false,
-    "collapsable": true,
-    "panels": [{
-      "span": 12,
-      "editable": true,
-      "group": [
-        "default"
-      ],
-      "type": "table",
-      "size": 10,
-      "pages": 500,
-      "offset": 0,
-      "style": {
-        "font-size": "9pt"
-      },
-      "overflow": "min-height",
-      "fields": [],
-      "highlight": [],
-      "sortable": false,
-      "header": true,
-      "paging": true,
-      "spyable": true,
-      "queries": {
-        "mode": "all",
-        "ids": [
-          0
-        ],
-        "query": "q=*%3A*&wt=json&rows=5000",
-        "basic_query": "q=*%3A*"
-      },
-      "field_list": true,
-      "status": "Stable",
-      "trimFactor": 300,
-      "normTimes": true,
+      "collapse": false,
+      "collapsable": true,
+      "panels": [
+        {
+          "error": false,
+          "span": 5,
+          "editable": true,
+          "spyable": true,
+          "group": [
+            "default"
+          ],
+          "type": "filtering"
+        },
+        {
+          "span": 4,
+          "editable": true,
+          "type": "iframe",
+          "loadingEditor": false,
+          "queries": {
+            "mode": "all",
+            "ids": [
+              0
+            ],
+            "query": "q=*%3A*&stats=true&stats.field=id&wt=json&rows=0\n",
+            "basic_query": "",
+            "custom": ""
+          },
+          "style": {
+            "font-size": "10pt"
+          },
+          "arrangement": "horizontal",
+          "chart": "total",
+          "counter_pos": "above",
+          "donut": false,
+          "tilt": false,
+          "labels": true,
+          "spyable": true,
+          "show_queries": true,
+          "IFrameDetails": [
+            {
+              "type": "count",
+              "field": "id",
+              "decimalDigits": 2,
+              "label": "",
+              "value": "52.00",
+              "url": "http://localhost/banana/app/panels/subcollection/diagnostic.html"
+            }
+          ],
+          "refresh": {
+            "enable": false,
+            "interval": 2
+          },
+          "title": "Test"
+        }
+      ]
+    },
+    {
       "title": "Events",
-      "saveOption": "json",
-      "exportSize": 5000,
-      "exportAll": true,
-      "displayLinkIcon": true,
-      "imageFields": [],
-      "imgFieldWidth": "auto",
-      "imgFieldHeight": "85px",
-      "sort": [],
-      "important_fields": [
-        "_version_",
-        "anchor",
-        "boost",
-        "content",
-        "digest",
-        "host",
-        "id",
-        "segment",
-        "title",
-        "tstamp",
-        "url"
-      ],
-      "show_queries": true,
-      "maxNumCalcTopFields": 20,
-      "calcTopFieldValuesFromAllData": false,
-      "refresh": {
-        "enable": false,
-        "interval": 2
-      }
-    }]
-  }],
+      "height": "250px",
+      "editable": true,
+      "collapse": false,
+      "collapsable": true,
+      "panels": [
+        {
+          "span": 12,
+          "editable": true,
+          "group": [
+            "default"
+          ],
+          "type": "table",
+          "size": 10,
+          "pages": 500,
+          "offset": 0,
+          "style": {
+            "font-size": "9pt"
+          },
+          "overflow": "min-height",
+          "fields": [],
+          "highlight": [],
+          "sortable": false,
+          "header": true,
+          "paging": true,
+          "spyable": true,
+          "queries": {
+            "mode": "all",
+            "ids": [
+              0
+            ],
+            "query": "q=*%3A*&wt=json&rows=5000",
+            "basic_query": "q=*%3A*"
+          },
+          "field_list": true,
+          "status": "Stable",
+          "trimFactor": 300,
+          "normTimes": true,
+          "title": "Events",
+          "saveOption": "json",
+          "exportSize": 5000,
+          "exportAll": true,
+          "displayLinkIcon": true,
+          "imageFields": [],
+          "imgFieldWidth": "auto",
+          "imgFieldHeight": "85px",
+          "sort": [],
+          "important_fields": [
+            "_version_",
+            "anchor",
+            "boost",
+            "content",
+            "digest",
+            "host",
+            "id",
+            "segment",
+            "title",
+            "tstamp",
+            "url"
+          ],
+          "show_queries": true,
+          "maxNumCalcTopFields": 20,
+          "calcTopFieldValuesFromAllData": false,
+          "refresh": {
+            "enable": false,
+            "interval": 2
+          }
+        }
+      ]
+    }
+  ],
   "editable": true,
   "index": {
     "interval": "none",
