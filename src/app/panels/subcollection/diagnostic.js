@@ -37,8 +37,8 @@ function getSolrData() {
 
         //console.log(i);
 
-        $('#content').html($('#content').html() + "<BR>" + JSON.stringify(
-          data.response.docs[i], null, 2));
+        /* $('#content').html($('#content').html() + "<BR>" + JSON.stringify(
+          data.response.docs[i], null, 2)); */
 
 
 
@@ -62,7 +62,7 @@ function getSolrData() {
 
         var tmpArray = [];
 
-        for (var key in data.response.docs[i]) {
+        /*for (var key in data.response.docs[i]) {
           if (data.response.docs[i].hasOwnProperty(key)) {
             switch (key) {
               case '_version_':
@@ -74,7 +74,25 @@ function getSolrData() {
                 tmpArray.push(data.response.docs[i][key][0]);
                 break;
             }
+          }
+        }*/
 
+        for (var j = 0; j < fs_chartData.labels.length; j++) {
+          switch (fs_chartData.labels[j]) {
+            case '_version_':
+            case 'id':
+              // do nothing
+              break;
+            default:
+              if (data.response.docs[i][fs_chartData.labels[j]] !==
+                undefined) {
+                tmpArray.push(data.response.docs[i][fs_chartData.labels[j]]
+                  [0]);
+              } else {
+                tmpArray.push(0); // TODO: Null? Undefined??
+              }
+
+              break;
           }
         }
 
@@ -82,6 +100,17 @@ function getSolrData() {
 
       }
       console.log(fs_chartData);
+      new Chartist.Bar('#graph', fs_chartData, {
+          //stackBars: true
+        })
+        /*.on('draw', function(data) {
+                if (data.type === 'bar') {
+                  data.element.attr({
+                    style: 'stroke-width: 50px'
+                  });
+                }
+              })*/
+      ;
     },
     'dataType': 'jsonp',
     'jsonp': 'json.wrf'
