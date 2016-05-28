@@ -43,12 +43,15 @@ define([
       description: "Showing stats like count, min, max, and etc. for the current query including all the applied filters."
     };
 
-    function Metric() {
-      this.type = 'count'; // Stats type
+    function IFrameDetail() {
+
+      this.url = '';
+
+      /*this.type = 'count'; // Stats type
       this.field = ''; // Stats field
       this.decimalDigits = 2;
       this.label = '';
-      this.value = 0;
+      this.value = 0;*/
     }
 
     // Set and populate defaults
@@ -71,7 +74,7 @@ define([
       labels: true,
       spyable: true,
       show_queries: true,
-      metrics: [new Metric()],
+      IFrameDetails: [new IFrameDetail()],
       refresh: {
         enable: false,
         interval: 2
@@ -117,17 +120,21 @@ define([
       }
     };
 
-    $scope.addMetric = function() {
-      $scope.panel.metrics.push(new Metric());
+    $scope.addIFrameDetail = function() {
+      $scope.panel.IFrameDetails.push(new IFrameDetail());
     };
 
-    $scope.removeMetric = function(metric) {
-      if ($scope.panel.metrics.length > 1) {
-        $scope.panel.metrics = _.without($scope.panel.metrics, metric);
+    $scope.removeIFrameDetail = function(IFrameDetail) {
+      if ($scope.panel.IFrameDetails.length > 1) {
+        $scope.panel.IFrameDetails = _.without($scope.panel.IFrameDetails,
+          IFrameDetail);
       }
     };
 
     $scope.get_data = function() {
+
+      ///debugger;
+
       delete $scope.panel.error;
       $scope.panelMeta.loading = true;
 
@@ -164,9 +171,9 @@ define([
       }
 
       var stats = '&stats=true';
-      _.each($scope.panel.metrics, function(metric) {
-        if (metric.field) {
-          stats += '&stats.field=' + metric.field;
+      _.each($scope.panel.IFrameDetails, function(IFrameDetail) {
+        if (IFrameDetail.field) {
+          stats += '&stats.field=' + IFrameDetail.field;
         }
       });
 
@@ -174,6 +181,7 @@ define([
       var rows_limit = '&rows=0'; // for iframe, we do not need the actual response doc, so set rows=0
       var promises = [];
       $scope.data = [];
+      $scope.url = IFrameDetail.url;
       $scope.iframe = 0;
       $scope.panel.queries.query = '';
 
@@ -198,11 +206,14 @@ define([
           $scope.panelMeta.loading = false;
 
           _.each(results[i].stats.stats_fields, function(
-            metricValues, metricField) {
-            _.each($scope.panel.metrics, function(metric) {
-              if (metric.field === metricField) {
-                metric.value = metricValues[metric.type]
-                  .toFixed(metric.decimalDigits);
+            IFrameDetailValues, IFrameDetailField) {
+            _.each($scope.panel.IFrameDetails, function(
+              IFrameDetail) {
+              if (IFrameDetail.field ===
+                IFrameDetailField) {
+                IFrameDetail.value =
+                  IFrameDetailValues[IFrameDetail.type]
+                  .toFixed(IFrameDetail.decimalDigits);
               }
             });
           });

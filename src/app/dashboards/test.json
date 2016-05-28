@@ -1,5 +1,5 @@
 {
-  "title": "New Non-Time Series Dashboard",
+  "title": "TEST BED",
   "services": {
     "query": {
       "idQueue": [
@@ -107,6 +107,44 @@
         "default"
       ],
       "type": "filtering"
+    }, {
+      "span": 4,
+      "editable": true,
+      "type": "iframe",
+      "loadingEditor": false,
+      "queries": {
+        "mode": "all",
+        "ids": [
+          0
+        ],
+        "query": "q=*%3A*&stats=true&stats.field=id&stats.field=boost&wt=json&rows=0\n",
+        "basic_query": "",
+        "custom": ""
+      },
+      "style": {
+        "font-size": "10pt"
+      },
+      "arrangement": "horizontal",
+      "chart": "total",
+      "counter_pos": "above",
+      "donut": false,
+      "tilt": false,
+      "labels": true,
+      "spyable": true,
+      "show_queries": true,
+      "IFrameDetails": [{
+        "type": "count",
+        "field": "id",
+        "decimalDigits": 2,
+        "label": "",
+        "value": "52.00",
+        "url": "http://www.iol.co.za"
+      }],
+      "refresh": {
+        "enable": false,
+        "interval": 2
+      },
+      "title": "Test"
     }]
   }, {
     "title": "Events",

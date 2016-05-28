@@ -1,13 +1,18 @@
 <div ng-controller='iframe' ng-init="init()">
     <style>
-        .iframe-panel-metric {
+        .iframe-panel-IFrameDetail {
             display: inline-block;
             padding-right: 10px;
         }
-        .iframe-panel-metric-label {
+        .iframe-panel-IFrameDetail-label {
             font-size: 10pt;
         }
     </style>
+    <div>
+      <!--<div>{{panel.IFrameDetails[0].url}}</div>-->
+      <iframe id="{{$id}}-iframe" src="{{panel.IFrameDetails[0].url}}" seamless="true" frameBorder="false" height="100%" width="100%" />
+    </div>
+
 
     <div ng-show="panel.counter_pos == 'above' && (panel.chart == 'bar' || panel.chart == 'pie')" id='{{$id}}-legend'>
         <!-- vertical legend -->
@@ -56,19 +61,19 @@
 
     </div>
 
-    <!-- TODO -->
+    <!-- TODO
     <div ng-show="panel.chart == 'total'">
-        <!--<div ng-style="panel.style" class="iframe-panel-metric">-->
-            <!--<div>{{dashboard.numberWithCommas(iframe)}}</div>-->
-            <!--<div class="iframe-panel-metric-label">{{panel.stats_fieldLabel}}</div>-->
-        <!--</div>-->
-
-        <div ng-style="panel.style" class="iframe-panel-metric" ng-repeat="metric in panel.metrics">
-            <div>{{dashboard.numberWithCommas(metric.value)}}</div>
-            <div class="iframe-panel-metric-label">{{metric.label}}</div>
+        <div ng-style="panel.style" class="iframe-panel-IFrameDetail">
+            <div>{{dashboard.numberWithCommas(iframe)}}</div>
+            <div class="iframe-panel-IFrameDetail-label">{{panel.stats_fieldLabel}}</div>
         </div>
 
-    </div>
+        <div ng-style="panel.style" class="iframe-panel-IFrameDetail" ng-repeat="IFrameDetail in panel.IFrameDetails">
+            <div>{{dashboard.numberWithCommas(IFrameDetail.value)}}</div>
+            <div class="iframe-panel-IFrameDetail-label">{{IFrameDetail.label}}</div>
+        </div>
+
+    </div> -->
 
   <span ng-show="panel.chart == 'list'">
     <div ng-style="panel.style" style="display:inline-block;line-height:{{panel.style['font-size']}}"
