@@ -118,7 +118,8 @@ define(['settings'],
         'multiseries',
         'sunburst',
         'docviewer',
-        'iframe'
+        'iframe',
+        'subcollection'
       ]
     });
   });
