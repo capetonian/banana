@@ -115,6 +115,10 @@ app/panels/hits/module.js
 ----------------
 app/panels/hits/module.js
 
+app/panels/iframe/module.js
+----------------
+app/panels/iframe/module.js
+
 app/panels/map/module.js
 ----------------
 app/panels/map/lib/map.world.codes.js
