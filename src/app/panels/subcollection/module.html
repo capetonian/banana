@@ -15,7 +15,7 @@
       <th>Control Type</th>
       <th>Control Height (px)</th>
     -->
-      <iframe id="{{$id}}-subcollection" src="app/panels/subcollection/_subcollection-diagnostic.html?svr={{panel.subcollectionDetails[0].solrServer}}&q={{panel.subcollectionDetails[0].solrQuery}}&col={{panel.subcollectionDetails[0].solrCollection}}&lib={{panel.subcollectionDetails[0].controlLibrary}}&type={{panel.subcollectionDetails[0].controlType}}" scrolling="no" style="overflow:hidden;" seamless="true" frameBorder="false" height="{{panel.subcollectionDetails[0].controlHeight}}px" width="100%" />
+      <iframe id="{{$id}}-subcollection" src="app/panels/subcollection/_subcollection-diagnostic.html?svr={{dashboard.current.solr.server}}&q={{panel.subcollectionDetails[0].solrQuery}}&col={{panel.subcollectionDetails[0].solrCollection}}&lib={{panel.subcollectionDetails[0].controlLibrary}}&type={{panel.subcollectionDetails[0].controlType}}" scrolling="no" style="overflow:hidden;" seamless="true" frameBorder="false" height="{{panel.subcollectionDetails[0].controlHeight}}px" width="100%" />
     </div>
 
 

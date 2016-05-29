@@ -160,7 +160,43 @@
     "editable": true,
     "collapse": false,
     "collapsable": true,
-    "panels": []
+    "panels": [{
+      "span": 7,
+      "editable": true,
+      "type": "subcollection",
+      "loadingEditor": false,
+      "queries": {
+        "mode": "all",
+        "ids": [
+          0
+        ],
+        "query": "q=*%3A*&stats=true&wt=json&rows=0\n",
+        "basic_query": "",
+        "custom": ""
+      },
+      "style": {
+        "font-size": "10pt"
+      },
+      "arrangement": "horizontal",
+      "chart": "total",
+      "counter_pos": "above",
+      "donut": false,
+      "tilt": false,
+      "labels": true,
+      "spyable": true,
+      "show_queries": true,
+      "subcollectionDetails": [{
+        "url": "",
+        "solrCollection": "social_solr",
+        "controlLibrary": "chartist",
+        "controlType": "line",
+        "controlHeight": 250
+      }],
+      "refresh": {
+        "enable": false,
+        "interval": 2
+      }
+    }]
   }],
   "editable": true,
   "index": {
