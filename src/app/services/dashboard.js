@@ -254,7 +254,8 @@ define([
           type: "text/json;charset=utf-8"
         });
         // from filesaver.js
-        window.saveAs(blob, self.current.title + "-" + new Date().getTime());
+        window.saveAs(blob, self.current.title + "-" + new Date().getTime() +
+          ".json");
         return true;
       };
 

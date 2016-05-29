@@ -25,8 +25,10 @@ function getParameterByName(name, url) {
 
 function getSolrData() {
   //http://hdp24.fullstack.co.za:8983/solr/social_solr/select?q=*:*&wt=json
+
   $.ajax({
-    'url': 'http://hdp24.fullstack.co.za:8983/solr/social_solr/select',
+    'url': getParameterByName('svr') + getParameterByName('col') +
+      '/select',
     'data': {
       'wt': 'json',
       'q': '*:*'

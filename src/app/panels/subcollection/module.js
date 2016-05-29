@@ -46,6 +46,12 @@ define([
     function subcollectionDetail() {
 
       this.url = '';
+      this.solrServer = '';
+      this.solrQuery = '';
+      this.controlLibrary = '';
+      this.controlType = '';
+      this.controlHeight = '';
+
 
       /*this.type = 'count'; // Stats type
       this.field = ''; // Stats field
