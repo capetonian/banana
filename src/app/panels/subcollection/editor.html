@@ -24,15 +24,15 @@
               <!--<td>
                 <input type="text" class="input-large" placeholder="URL" ng-model="subcollectionDetail.url">
               </td>-->
-              <td><input type="text" class="input-large" placeholder="URL" ng-model="subcollectionDetail.solrCollection" bs-typeahead="dashboard.current.solr.core_list"></td>
-              <td><select class="input-small" ng-model="subcollectionDetail.controlLibrary"
+              <td>{{dashboard.current.solr.server}}<input type="text"  class="input-large" placeholder="solr collection" ng-model="subcollectionDetail.solrCollection" bs-typeahead="dashboard.current.solr.core_list"></td>
+              <td><select  class="input-small" ng-model="subcollectionDetail.controlLibrary"
                     ng-options="f for f in ['chartist','chartjs','cytoscape','dimplejs','nvd3','sigmajs','visjs','zeppelin']"></select>
               </td>
               <td>
-                <select class="input-small" ng-model="subcollectionDetail.controlType"
+                <select  class="input-small" ng-model="subcollectionDetail.controlType"
                       ng-options="f for f in ['bar','donut','gauge','line','pie','polar','radar','area','bubble','ring','scatter','step','steparea','graph2d','graph3d','network','timeline','bullet','stacked bar','discrete bar','expanded area']"></select>
                     </td>
-              <td>  <select class="input-mini" ng-model="subcollectionDetail.controlHeight" ng-options="f for f in [100,150,200,250,300,550,400,450,500,550,600,650,700]"></select></td>
+              <td>  <select  class="input-mini" ng-model="subcollectionDetail.controlHeight" ng-options="f for f in [100,150,200,250,300,550,400,450,500,550,600,650,700]"></select></td>
                 <!--<td>
                     <select class="input-small" ng-change="set_refresh(true)" ng-model="subcollectionDetail.type"
                             ng-options="f for f in ['count','min','mean','max','sum','stddev','sumOfSquares','missing']"></select>
@@ -51,7 +51,7 @@
                 <td>
                     <input type="hidden" ng-model="subcollectionDetail.solrServer" value="{{dashboard.current.solr.server}}" />
                     <input type="hidden" ng-model="subcollectionDetail.solrQuery" value="{{dashboard.current.services.query}}" />
-                    <button class="btn btn-danger" ng-click="removesubcollectionDetail(subcollectionDetail)"><i class="icon-remove"></i></button>
+                    <!--<button class="btn btn-danger" ng-click="removesubcollectionDetail(subcollectionDetail)"><i class="icon-remove"></i></button>-->
                 </td>
             </tr>
         </table>

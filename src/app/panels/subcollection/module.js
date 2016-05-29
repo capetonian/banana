@@ -46,11 +46,11 @@ define([
     function subcollectionDetail() {
 
       this.url = '';
-      this.solrServer = '';
+      /*this.solrServer = '';
       this.solrQuery = '';
       this.controlLibrary = '';
       this.controlType = '';
-      this.controlHeight = '';
+      this.controlHeight = '';*/
 
 
       /*this.type = 'count'; // Stats type
@@ -189,6 +189,11 @@ define([
       var promises = [];
       $scope.data = [];
       $scope.url = subcollectionDetail.url;
+      $scope.solrServer = subcollectionDetail.solrServer;
+      $scope.solrQuery = subcollectionDetail.solrQuery;
+      $scope.controlType = subcollectionDetail.controlType;
+      $scope.controlLibrary = subcollectionDetail.controlLibrary;
+      $scope.controlHeight = subcollectionDetail.controlHeight;
       $scope.subcollection = 0;
       $scope.panel.queries.query = '';
 

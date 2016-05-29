@@ -1,5 +1,5 @@
 $(document).ready(function() {
-  console.log('loading diagnostic...')
+  //onsole.log('loading diagnostic...')
   getSolrData();
 
 
@@ -34,7 +34,7 @@ function getSolrData() {
       'q': '*:*'
     },
     'success': function(data) {
-      console.log(data.response.docs);
+      //console.log(data.response.docs);
       for (i in data.response.docs) {
 
         //console.log(i);
@@ -101,17 +101,88 @@ function getSolrData() {
         fs_chartData.series.push(tmpArray);
 
       }
-      console.log(fs_chartData);
-      new Chartist.Bar('#graph', fs_chartData, {
-          //stackBars: true
-        })
-        /*.on('draw', function(data) {
-                if (data.type === 'bar') {
-                  data.element.attr({
-                    style: 'stroke-width: 50px'
-                  });
-                }
-              })*/
+
+      /* ?svr=http://hdp24.fullstack.co.za:8983/solr/
+      &q={"query":"*:*","alias":"","color":"#7EB26D","id":0,"pin":false,"type":"lucene"}
+      &col=social_solr
+      &lib=chartist
+      &type=bar
+      */
+      //debugger;
+      switch (getParameterByName('lib')) {
+        case 'chartist':
+          switch (getParameterByName('type')) {
+            case 'bar':
+              new Chartist.Bar('#graph', fs_chartData);
+              break;
+            case 'donut':
+              new Chartist.Donut('#graph', fs_chartData);
+              break;
+            case 'gauge':
+              new Chartist.Gauge('#graph', fs_chartData);
+              break;
+            case 'line':
+              new Chartist.Line('#graph', fs_chartData);
+              break;
+            case 'pie':
+              new Chartist.Pie('#graph', fs_chartData);
+              break;
+            default:
+              break;
+          }
+          break;
+        case 'chartjs':
+          switch (getParameterByName('type')) {
+            default: break;
+          }
+          break;
+        case 'cytoscape':
+          switch (getParameterByName('type')) {
+            default: break;
+          }
+          break;
+        case 'dimplejs':
+          switch (getParameterByName('type')) {
+            default: break;
+          }
+          break;
+        case 'nvd3':
+          switch (getParameterByName('type')) {
+            default: break;
+          }
+          break;
+        case 'sigma':
+          switch (getParameterByName('type')) {
+            default: break;
+          }
+          break;
+        case 'visjs':
+          switch (getParameterByName('type')) {
+            default: break;
+          }
+          break;
+        case 'zeppelin':
+          switch (getParameterByName('type')) {
+            default: break;
+          }
+          break;
+        default:
+          new Chartist.Bar('#graph', fs_chartData);
+          break;
+      }
+
+
+      //console.log(fs_chartData);
+      //new Chartist.Bar('#graph', fs_chartData, {
+      //stackBars: true
+      //  })
+      /*.on('draw', function(data) {
+              if (data.type === 'bar') {
+                data.element.attr({
+                  style: 'stroke-width: 50px'
+                });
+              }
+            })*/
       ;
     },
     'dataType': 'jsonp',
