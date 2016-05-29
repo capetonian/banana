@@ -1,6 +1,6 @@
 /*
 
- ## iframe
+ ## subcollection
 
  ### Parameters
  * style :: A hash of css styles
@@ -23,10 +23,10 @@ define([
 ], function(angular, app, _, $, kbn) {
   'use strict';
 
-  var module = angular.module('kibana.panels.iframe', []);
+  var module = angular.module('kibana.panels.subcollection', []);
   app.useModule(module);
 
-  module.controller('iframe', function($scope, $q, $timeout, timer,
+  module.controller('subcollection', function($scope, $q, $timeout, timer,
     querySrv, dashboard, filterSrv) {
     $scope.panelMeta = {
       modals: [{
@@ -43,7 +43,7 @@ define([
       description: "Showing stats like count, min, max, and etc. for the current query including all the applied filters."
     };
 
-    function IFrameDetail() {
+    function subcollectionDetail() {
 
       this.url = '';
 
@@ -74,7 +74,7 @@ define([
       labels: true,
       spyable: true,
       show_queries: true,
-      IFrameDetails: [new IFrameDetail()],
+      subcollectionDetails: [new subcollectionDetail()],
       refresh: {
         enable: false,
         interval: 2
@@ -83,7 +83,7 @@ define([
     _.defaults($scope.panel, _d);
 
     $scope.init = function() {
-      $scope.iframe = 0;
+      $scope.subcollection = 0;
 
       // Start refresh timer if enabled
       if ($scope.panel.refresh.enable) {
@@ -120,14 +120,14 @@ define([
       }
     };
 
-    $scope.addIFrameDetail = function() {
-      $scope.panel.IFrameDetails.push(new IFrameDetail());
+    $scope.addsubcollectionDetail = function() {
+      $scope.panel.subcollectionDetails.push(new subcollectionDetail());
     };
 
-    $scope.removeIFrameDetail = function(IFrameDetail) {
-      if ($scope.panel.IFrameDetails.length > 1) {
-        $scope.panel.IFrameDetails = _.without($scope.panel.IFrameDetails,
-          IFrameDetail);
+    $scope.removesubcollectionDetail = function(subcollectionDetail) {
+      if ($scope.panel.subcollectionDetails.length > 1) {
+        $scope.panel.subcollectionDetails = _.without($scope.panel.subcollectionDetails,
+          subcollectionDetail);
       }
     };
 
@@ -171,18 +171,19 @@ define([
       }
 
       var stats = '&stats=true';
-      _.each($scope.panel.IFrameDetails, function(IFrameDetail) {
-        if (IFrameDetail.field) {
-          stats += '&stats.field=' + IFrameDetail.field;
+      _.each($scope.panel.subcollectionDetails, function(
+        subcollectionDetail) {
+        if (subcollectionDetail.field) {
+          stats += '&stats.field=' + subcollectionDetail.field;
         }
       });
 
       var wt_json = '&wt=json';
-      var rows_limit = '&rows=0'; // for iframe, we do not need the actual response doc, so set rows=0
+      var rows_limit = '&rows=0'; // for subcollection, we do not need the actual response doc, so set rows=0
       var promises = [];
       $scope.data = [];
-      $scope.url = IFrameDetail.url;
-      $scope.iframe = 0;
+      $scope.url = subcollectionDetail.url;
+      $scope.subcollection = 0;
       $scope.panel.queries.query = '';
 
       _.each($scope.panel.queries.ids, function(id) {
@@ -206,16 +207,19 @@ define([
           $scope.panelMeta.loading = false;
 
           _.each(results[i].stats.stats_fields, function(
-            IFrameDetailValues, IFrameDetailField) {
-            _.each($scope.panel.IFrameDetails, function(
-              IFrameDetail) {
-              if (IFrameDetail.field ===
-                IFrameDetailField) {
-                IFrameDetail.value =
-                  IFrameDetailValues[IFrameDetail.type]
-                  .toFixed(IFrameDetail.decimalDigits);
-              }
-            });
+            subcollectionDetailValues,
+            subcollectionDetailField) {
+            _.each($scope.panel.subcollectionDetails,
+              function(
+                subcollectionDetail) {
+                if (subcollectionDetail.field ===
+                  subcollectionDetailField) {
+                  subcollectionDetail.value =
+                    subcollectionDetailValues[
+                      subcollectionDetail.type]
+                    .toFixed(subcollectionDetail.decimalDigits);
+                }
+              });
           });
 
           // Check for error and abort if found
@@ -230,7 +234,7 @@ define([
           // $scope.data[i] = {
           //     info: info,
           //     id: id,
-          //     iframe: result_value,
+          //     subcollection: result_value,
           //     data: [[id, result_value]]
           // };
           $scope.$emit('render');
@@ -260,7 +264,7 @@ define([
     };
   });
 
-  module.directive('iframeChart', function(querySrv) {
+  module.directive('subcollectionChart', function(querySrv) {
     return {
       restrict: 'A',
       link: function(scope, elem) {
@@ -351,9 +355,8 @@ define([
                       show: scope.panel.labels,
                       radius: 2 / 3,
                       formatter: function(label, series) {
-                        return
-                          '<div ng-click="build_search(panel.query.field,\'' +
-                          label + '\')' +
+                        return '<div ng-click="build_search(panel.query.field,\'' +
+                        label + '\')' +
                           ' "style="font-size:8pt;text-align:center;padding:2px;color:white;">' +
                           label + '<br/>' + Math.round(series.percent) +
                           '%</div>';

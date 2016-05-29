@@ -3,7 +3,7 @@
 </div>
 
 <!--<div class="row-fluid">
-    <button class="btn btn-success" ng-click="addIFrameDetail();">Add IFrameDetail</button>
+    <button class="btn btn-success" ng-click="addsubcollectionDetail();">Add subcollectionDetail</button>
 </div>-->
 
 <div class="row-fluid">
@@ -16,27 +16,27 @@
                 <th>Decimal Digits <tip>The number of digits to display after the decimal point.</tip></th>
                 <th>Label</th>-->
             </thead>
-            <tr ng-repeat="IFrameDetail in panel.IFrameDetails" data-drag="false" jqyoui-draggable="{animate:true}">
+            <tr ng-repeat="subcollectionDetail in panel.subcollectionDetails" data-drag="false" jqyoui-draggable="{animate:true}">
               <td>
-                <input type="text" class="input-large" placeholder="URL" ng-model="IFrameDetail.url">
+                <input type="text" class="input-large" placeholder="URL" ng-model="subcollectionDetail.url">
               </td>
                 <!--<td>
-                    <select class="input-small" ng-change="set_refresh(true)" ng-model="IFrameDetail.type"
+                    <select class="input-small" ng-change="set_refresh(true)" ng-model="subcollectionDetail.type"
                             ng-options="f for f in ['count','min','mean','max','sum','stddev','sumOfSquares','missing']"></select>
                 </td>
                 <td>
                     <input type="text" class="input-large" placeholder="Field name" bs-typeahead="fields.list"
-                           ng-model="IFrameDetail.field" ng-change="set_refresh(true)">
+                           ng-model="subcollectionDetail.field" ng-change="set_refresh(true)">
                 </td>
                 <td>
-                    <select class="input-mini" ng-model="IFrameDetail.decimalDigits" ng-options="f for f in [0,1,2,3,4,5,6,7,8,9]"
+                    <select class="input-mini" ng-model="subcollectionDetail.decimalDigits" ng-options="f for f in [0,1,2,3,4,5,6,7,8,9]"
                             ng-change="set_refresh(true)"></select>
                 </td>
                 <td>
-                    <input type="text" class="input-large" placeholder="Optional" ng-model="IFrameDetail.label">
+                    <input type="text" class="input-large" placeholder="Optional" ng-model="subcollectionDetail.label">
                 </td>-->
                 <td>
-                    <button class="btn btn-danger" ng-click="removeIFrameDetail(IFrameDetail)"><i class="icon-remove"></i></button>
+                    <button class="btn btn-danger" ng-click="removesubcollectionDetail(subcollectionDetail)"><i class="icon-remove"></i></button>
                 </td>
             </tr>
         </table>

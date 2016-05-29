@@ -100,7 +100,7 @@
     "collapsable": true,
     "panels": [{
       "error": false,
-      "span": 5,
+      "span": 4,
       "editable": true,
       "spyable": true,
       "group": [
@@ -108,7 +108,7 @@
       ],
       "type": "filtering"
     }, {
-      "span": 4,
+      "span": 8,
       "editable": true,
       "type": "iframe",
       "loadingEditor": false,
@@ -155,64 +155,36 @@
     "panels": [{
       "span": 12,
       "editable": true,
-      "group": [
-        "default"
-      ],
-      "type": "table",
-      "size": 10,
-      "pages": 500,
-      "offset": 0,
-      "style": {
-        "font-size": "9pt"
-      },
-      "overflow": "min-height",
-      "fields": [],
-      "highlight": [],
-      "sortable": false,
-      "header": true,
-      "paging": true,
-      "spyable": true,
+      "type": "subcollection",
+      "loadingEditor": false,
       "queries": {
         "mode": "all",
         "ids": [
           0
         ],
-        "query": "q=*%3A*&wt=json&rows=5000",
-        "basic_query": "q=*%3A*"
+        "query": "q=*%3A*&stats=true&wt=json&rows=0\n",
+        "basic_query": "",
+        "custom": ""
       },
-      "field_list": true,
-      "status": "Stable",
-      "trimFactor": 300,
-      "normTimes": true,
-      "title": "Events",
-      "saveOption": "json",
-      "exportSize": 5000,
-      "exportAll": true,
-      "displayLinkIcon": true,
-      "imageFields": [],
-      "imgFieldWidth": "auto",
-      "imgFieldHeight": "85px",
-      "sort": [],
-      "important_fields": [
-        "_version_",
-        "anchor",
-        "boost",
-        "content",
-        "digest",
-        "host",
-        "id",
-        "segment",
-        "title",
-        "tstamp",
-        "url"
-      ],
+      "style": {
+        "font-size": "10pt"
+      },
+      "arrangement": "horizontal",
+      "chart": "total",
+      "counter_pos": "above",
+      "donut": false,
+      "tilt": false,
+      "labels": true,
+      "spyable": true,
       "show_queries": true,
-      "maxNumCalcTopFields": 20,
-      "calcTopFieldValuesFromAllData": false,
+      "subcollectionDetails": [{
+        "url": "app/panels/subcollection/_subcollection-diagnostic.html"
+      }],
       "refresh": {
         "enable": false,
         "interval": 2
-      }
+      },
+      "title": "stats"
     }]
   }],
   "editable": true,
