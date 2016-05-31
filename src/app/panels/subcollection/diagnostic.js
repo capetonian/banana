@@ -37,22 +37,32 @@ function getSolrData() {
 
       switch (getParameterByName('lib')) {
         case 'chartist':
-          BarChartData();
-          switch (getParameterByName('type')) {
-            case 'bar':
 
+
+          switch (getParameterByName('type')) {
+            case 'stacked bar':
+              //console.log(getParameterByName('type'));
+              BarChartData(data);
+              new Chartist.Bar('#graph', fs_chartData, {stackBars: true});
+              break;
+            case 'bar':
+              BarChartData(data);
               new Chartist.Bar('#graph', fs_chartData);
               break;
             case 'donut':
+              PieChartData(data);
               new Chartist.Donut('#graph', fs_chartData);
               break;
             case 'gauge':
+              PieChartData(data);
               new Chartist.Gauge('#graph', fs_chartData);
               break;
             case 'line':
+              BarChartData(data);
               new Chartist.Line('#graph', fs_chartData);
               break;
             case 'pie':
+              PieChartData(data);
               new Chartist.Pie('#graph', fs_chartData);
               break;
             default:
@@ -118,7 +128,7 @@ function getSolrData() {
   });
 }
 
-function BarChartData() {
+function BarChartData(data) {
   for (i in data.response.docs) {
 
     //console.log(i);
@@ -169,4 +179,68 @@ function BarChartData() {
     fs_chartData.series.push(tmpArray);
 
   }
+}
+
+
+function PieChartData(data) {
+  for (i in data.response.docs) {
+
+    //console.log(i);
+
+    /* $('#content').html($('#content').html() + "<BR>" + JSON.stringify(
+      data.response.docs[i], null, 2)); */
+
+    if (i == 0) { // First row
+      for (x in data.response.docs[0]) {
+
+        switch (x) {
+          case '_version_':
+          case 'id':
+          case 'day':
+            // do nothing
+            break;
+          default:
+            console.log(x);
+            fs_chartData.labels.push(x);
+            break;
+        }
+
+      }
+
+    }
+
+    var tmpArray = [];
+
+
+    for (var j = 0; j < fs_chartData.labels.length; j++) {
+      switch (fs_chartData.labels[j]) {
+        case '_version_':
+        case 'id':
+        case 'day':
+          // do nothing
+          break;
+        default:
+          if (data.response.docs[i][fs_chartData.labels[j]] !==
+            undefined) {
+              if(data.response.docs[i][fs_chartData.labels[j]]
+                [0] != 'primer')
+                {
+            tmpArray.push(data.response.docs[i][fs_chartData.labels[j]]
+              [0]);
+            }
+            else {
+              // do nothing
+            }
+          } else {
+            tmpArray.push(0); // TODO: Null? Undefined??
+          }
+
+          break;
+      }
+    }
+
+    fs_chartData.series.push(tmpArray);
+
+  }
+  console.log(fs_chartData);
 }

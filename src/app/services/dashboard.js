@@ -330,7 +330,7 @@ define([
       };
 
       this.create_system_collection = function() {
-        //console.log("Creating system collection: " + config.banana_index);
+        console.log("Creating system collection: " + config.banana_index);
         $http({
           url: "/api/apollo/collections/" + config.banana_index,
           method: "PUT",

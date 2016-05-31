@@ -1,0 +1,49 @@
+NIFI Packages
+
+Landing Locations
+
+Hive De-duplication (Quick overview)
+
+Hive to SOLR (quick - detailed later in the week)
+
+Discussion re: SOLR
+
+*** We are using SOLR as a fairly simple tool. Its depth and complexity is fairly daunting, but it is extremely powerful. We need to discuss what the implications are, and how it can be used. We are not using many or any of these functionalities - although we have explored them for use in the banana code base and have found them wanting.
+
+  - Implications of schema less
+  - Practical implications of schema
+    - FIELD DESIGN -  use of copy fields ( https://cwiki.apache.org/confluence/display/solr/Documents%2C+Fields%2C+and+Schema+Design / )
+    - SEARCHING - https://cwiki.apache.org/confluence/display/solr/Searching
+    - SUGGESTER https://cwiki.apache.org/confluence/display/solr/Suggester
+    - Implication of Faceting (complexity threshold) - https://cwiki.apache.org/confluence/display/solr/Faceting
+    - Letting SOLR do stats - why we don't believe it is simple or easy - https://cwiki.apache.org/confluence/display/solr/The+Stats+Component
+    - Non plain text content - implication of indexing and basic data ops : https://cwiki.apache.org/confluence/display/solr/Indexing+and+Basic+Data+Operations
+
+    Features to discuss re: SOLR
+    http://lucene.apache.org/solr/features.html
+
+BANANA
+
+  - Additions to banana
+    - IFRAME
+    - Subcollection
+    - Graphing Libraries
+      - SOLR to JSON for Control Consumption
+    - How to add a new control type
+
+HTML5 Application
+
+  - Creation of a dashboard
+  - Saving dashboards to SOLR itself
+  - Keeping SOLR consuming payloads OFF the cluster (i.e. CORS configuration) - democratisation of data
+
+Creation of a dashboard
+  - Presenting the stitched data
+  - How to use banana to extend and quickly present data
+  - Why banana and not qlikview?
+
+To come:
+  - Business dashboards
+    - For sentiment
+    - For leads
+    - For comparison
