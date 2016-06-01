@@ -26,6 +26,8 @@ function getParameterByName(name, url) {
 function getSolrData() {
   //http://hdp24.fullstack.co.za:8983/solr/social_solr/select?q=*:*&wt=json
 
+  // ['bar','donut','gauge','line','pie','polar','radar','area','bubble','ring','scatter','step','steparea','graph2d','graph3d','network','timeline','bullet','stacked bar','discrete bar','expanded area']
+
   $.ajax({
     'url': getParameterByName('svr') + getParameterByName('col') +
       '/select',
@@ -37,41 +39,107 @@ function getSolrData() {
 
       switch (getParameterByName('lib')) {
         case 'chartist':
-
-
           switch (getParameterByName('type')) {
             case 'stacked bar':
               //console.log(getParameterByName('type'));
-              BarChartData(data);
-              new Chartist.Bar('#graph', fs_chartData, {stackBars: true});
+              ChartistBarChartData(data);
+              new Chartist.Bar('#graph', fs_chartData, {
+                stackBars: true
+              });
               break;
             case 'bar':
-              BarChartData(data);
+              ChartistBarChartData(data);
               new Chartist.Bar('#graph', fs_chartData);
               break;
             case 'donut':
-              PieChartData(data);
-              new Chartist.Donut('#graph', fs_chartData);
+              ChartistPieChartData(data);
+              new Chartist.Donut('#graph', fs_chartData, {
+                labelInterpolationFnc: function(value) {
+                  return Math.round(value / data.series.reduce(sum) *
+                    100) + '%';
+                }
+              });
               break;
             case 'gauge':
-              PieChartData(data);
-              new Chartist.Gauge('#graph', fs_chartData);
+              ChartistPieChartData(data);
+              new Chartist.Gauge('#graph',
+                fs_chartData, {
+                  labelInterpolationFnc: function(value) {
+                    return Math.round(value / data.series.reduce(
+                      sum) * 100) + '%';
+                  }
+                });
               break;
             case 'line':
-              BarChartData(data);
-              new Chartist.Line('#graph', fs_chartData);
+              ChartistBarChartData(data);
+              new Chartist.Line('#graph',
+                fs_chartData);
               break;
             case 'pie':
-              PieChartData(data);
-              new Chartist.Pie('#graph', fs_chartData);
+              ChartistPieChartData(data);
+              new Chartist.Pie('#graph',
+                fs_chartData, {
+                  labelInterpolationFnc: function(value) {
+                    return Math.round(value / data.series.reduce(
+                      sum) * 100) + '%';
+                  }
+                });
               break;
             default:
               break;
           }
           break;
         case 'chartjs':
+          var ctx = document.getElementById("cChart");
           switch (getParameterByName('type')) {
-            default: break;
+            ChartJSChartData(data);
+            case 'bar':
+              var chartInstance = new Chart(ctx, {
+                type: 'line',
+                data: fs_chartData,
+                options: {
+                  responsive: true
+                }
+              });
+              break;
+            case 'doughnut':
+              var chartInstance = new Chart(ctx, {
+                type: 'line',
+                data: fs_chartData,
+                options: {
+                  responsive: true
+                }
+              });
+              break;
+            case 'line':
+              var chartInstance = new Chart(ctx, {
+                type: 'line',
+                data: fs_chartData,
+                options: {
+                  responsive: true
+                }
+              });
+              break;
+            case 'pie':
+              var chartInstance = new Chart(ctx, {
+                type: 'line',
+                data: fs_chartData,
+                options: {
+                  responsive: true
+                }
+              });
+              break;
+            case 'polararea':
+              var chartInstance = new Chart(ctx, {
+                type: 'line',
+                data: fs_chartData,
+                options: {
+                  responsive: true
+                }
+              });
+              break;
+            default:
+              break;
           }
           break;
         case 'cytoscape':
@@ -81,22 +149,89 @@ function getSolrData() {
           break;
         case 'dimplejs':
           switch (getParameterByName('type')) {
-            default: break;
+            case 'area':
+              break;
+            case 'bar':
+              break;
+            case 'bubble':
+              break;
+            case 'line':
+              break;
+            case 'pie':
+              break;
+            case 'ring':
+              break;
+            case 'scatter':
+              break;
+            case 'step':
+              break;
+            case 'step area':
+              break;
+            default:
+              break;
           }
           break;
         case 'nvd3':
           switch (getParameterByName('type')) {
-            default: break;
+            case 'bubble':
+              break;
+            case 'bullet':
+              break;
+            case 'discrete bar'
+            break;
+            case 'expanded area':
+              break;
+            case 'grouped horizontal bar':
+              break;
+            case 'grouped multi bar':
+              break;
+            case 'html indented tree':
+              break;
+            case 'line bar combo':
+              break;
+            case 'line cumulative':
+              break;
+            case 'line with view':
+              break;
+            case 'pie':
+              break;
+            case 'scatter':
+              break;
+            case 'simpleline':
+            case 'simple line':
+            case 'line':
+              break;
+            case 'stacked multibar':
+              break;
+            case 'stacked':
+            case 'stacked bar':
+              break;
+            case 'stream':
+              break;
+            default:
+              break;
           }
           break;
         case 'sigma':
           switch (getParameterByName('type')) {
-            default: break;
+            case 'graph':
+              break;
+            default:
+              break;
           }
           break;
         case 'visjs':
           switch (getParameterByName('type')) {
-            default: break;
+            case 'graph2d':
+              break;
+            case 'graph3d':
+              break;
+            case 'network':
+              break;
+            case 'timeline':
+              break;
+            default:
+              break;
           }
           break;
         case 'zeppelin':
@@ -126,121 +261,4 @@ function getSolrData() {
     'dataType': 'jsonp',
     'jsonp': 'json.wrf'
   });
-}
-
-function BarChartData(data) {
-  for (i in data.response.docs) {
-
-    //console.log(i);
-
-    /* $('#content').html($('#content').html() + "<BR>" + JSON.stringify(
-      data.response.docs[i], null, 2)); */
-
-    if (i == 0) { // First row
-      for (x in data.response.docs[0]) {
-
-        switch (x) {
-          case '_version_':
-          case 'id':
-            // do nothing
-            break;
-          default:
-            console.log(x);
-            fs_chartData.labels.push(x);
-            break;
-        }
-
-      }
-
-    }
-
-    var tmpArray = [];
-
-
-    for (var j = 0; j < fs_chartData.labels.length; j++) {
-      switch (fs_chartData.labels[j]) {
-        case '_version_':
-        case 'id':
-          // do nothing
-          break;
-        default:
-          if (data.response.docs[i][fs_chartData.labels[j]] !==
-            undefined) {
-            tmpArray.push(data.response.docs[i][fs_chartData.labels[j]]
-              [0]);
-          } else {
-            tmpArray.push(0); // TODO: Null? Undefined??
-          }
-
-          break;
-      }
-    }
-
-    fs_chartData.series.push(tmpArray);
-
-  }
-}
-
-
-function PieChartData(data) {
-  for (i in data.response.docs) {
-
-    //console.log(i);
-
-    /* $('#content').html($('#content').html() + "<BR>" + JSON.stringify(
-      data.response.docs[i], null, 2)); */
-
-    if (i == 0) { // First row
-      for (x in data.response.docs[0]) {
-
-        switch (x) {
-          case '_version_':
-          case 'id':
-          case 'day':
-            // do nothing
-            break;
-          default:
-            console.log(x);
-            fs_chartData.labels.push(x);
-            break;
-        }
-
-      }
-
-    }
-
-    var tmpArray = [];
-
-
-    for (var j = 0; j < fs_chartData.labels.length; j++) {
-      switch (fs_chartData.labels[j]) {
-        case '_version_':
-        case 'id':
-        case 'day':
-          // do nothing
-          break;
-        default:
-          if (data.response.docs[i][fs_chartData.labels[j]] !==
-            undefined) {
-              if(data.response.docs[i][fs_chartData.labels[j]]
-                [0] != 'primer')
-                {
-            tmpArray.push(data.response.docs[i][fs_chartData.labels[j]]
-              [0]);
-            }
-            else {
-              // do nothing
-            }
-          } else {
-            tmpArray.push(0); // TODO: Null? Undefined??
-          }
-
-          break;
-      }
-    }
-
-    fs_chartData.series.push(tmpArray);
-
-  }
-  console.log(fs_chartData);
 }

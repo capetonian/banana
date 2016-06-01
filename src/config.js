@@ -119,7 +119,8 @@ define(['settings'],
         'sunburst',
         'docviewer',
         'iframe',
-        'subcollection'
+        'subcollection',
+        'qlikview'
       ]
     });
   });

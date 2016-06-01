@@ -189,8 +189,84 @@
         "url": "",
         "solrCollection": "social_solr",
         "controlLibrary": "chartist",
-        "controlType": "line",
-        "controlHeight": 250
+        "controlType": "stacked bar",
+        "controlHeight": 550
+      }],
+      "refresh": {
+        "enable": false,
+        "interval": 2
+      }
+    }, {
+      "span": 4,
+      "editable": true,
+      "type": "iframe",
+      "loadingEditor": false,
+      "queries": {
+        "mode": "all",
+        "ids": [
+          0
+        ],
+        "query": "q=*%3A*&stats=true&wt=json&rows=0\n",
+        "basic_query": "",
+        "custom": ""
+      },
+      "style": {
+        "font-size": "10pt"
+      },
+      "arrangement": "horizontal",
+      "chart": "total",
+      "counter_pos": "above",
+      "donut": false,
+      "tilt": false,
+      "labels": true,
+      "spyable": true,
+      "show_queries": true,
+      "IFrameDetails": [{
+        "url": "http://www.iol.co.za"
+      }],
+      "refresh": {
+        "enable": false,
+        "interval": 2
+      },
+      "title": "IOL"
+    }]
+  }, {
+    "title": "Additional Row",
+    "height": "150px",
+    "editable": true,
+    "collapse": false,
+    "collapsable": true,
+    "panels": [{
+      "span": 4,
+      "editable": true,
+      "type": "subcollection",
+      "loadingEditor": false,
+      "queries": {
+        "mode": "all",
+        "ids": [
+          0
+        ],
+        "query": "q=*%3A*&stats=true&wt=json&rows=0\n",
+        "basic_query": "",
+        "custom": ""
+      },
+      "style": {
+        "font-size": "10pt"
+      },
+      "arrangement": "horizontal",
+      "chart": "total",
+      "counter_pos": "above",
+      "donut": false,
+      "tilt": false,
+      "labels": true,
+      "spyable": true,
+      "show_queries": true,
+      "subcollectionDetails": [{
+        "url": "",
+        "solrCollection": "social_wt",
+        "controlLibrary": "chartist",
+        "controlType": "pie",
+        "controlHeight": 300
       }],
       "refresh": {
         "enable": false,
