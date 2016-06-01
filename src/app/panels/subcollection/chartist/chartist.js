@@ -1,6 +1,9 @@
 function ChartistBarChartData(data) {
 
-  var fs_chartData = [];
+  var fs_chartData = {
+    labels: [],
+    series: []
+  };
 
   for (i in data.response.docs) {
 
@@ -59,7 +62,10 @@ function ChartistBarChartData(data) {
 
 function ChartistPieChartData(data) {
 
-  var fs_chartData = [];
+  var fs_chartData = {
+    labels: [],
+    series: []
+  };
   for (i in data.response.docs) {
 
     //console.log(i);

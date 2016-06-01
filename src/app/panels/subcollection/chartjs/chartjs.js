@@ -1,6 +1,10 @@
 function ChartJSChartData(data) {
 
-  var fs_chartData = [];
+  var fs_chartData =
+    var fs_chartData = {
+      labels: [],
+      datasets: [] /* data */
+    };
 
   for (i in data.response.docs) {
 
@@ -49,7 +53,7 @@ function ChartJSChartData(data) {
       }
     }
 
-    fs_chartData.series.push(tmpArray);
+    fs_chartData.datasets.push(tmpArray);
 
   }
 
