@@ -42,17 +42,17 @@ function getSolrData() {
           switch (getParameterByName('type')) {
             case 'stacked bar':
               //console.log(getParameterByName('type'));
-              ChartistBarChartData(data);
+              fs_chartData = ChartistBarChartData(data);
               new Chartist.Bar('#graph', fs_chartData, {
                 stackBars: true
               });
               break;
             case 'bar':
-              ChartistBarChartData(data);
+              fs_chartData = ChartistBarChartData(data);
               new Chartist.Bar('#graph', fs_chartData);
               break;
             case 'donut':
-              ChartistPieChartData(data);
+              fs_chartData = ChartistPieChartData(data);
               new Chartist.Donut('#graph', fs_chartData, {
                 labelInterpolationFnc: function(value) {
                   return Math.round(value / data.series.reduce(sum) *
@@ -61,7 +61,7 @@ function getSolrData() {
               });
               break;
             case 'gauge':
-              ChartistPieChartData(data);
+              fs_chartData = ChartistPieChartData(data);
               new Chartist.Gauge('#graph',
                 fs_chartData, {
                   labelInterpolationFnc: function(value) {
@@ -71,12 +71,12 @@ function getSolrData() {
                 });
               break;
             case 'line':
-              ChartistBarChartData(data);
+              fs_chartData = ChartistBarChartData(data);
               new Chartist.Line('#graph',
                 fs_chartData);
               break;
             case 'pie':
-              ChartistPieChartData(data);
+              fs_chartData = ChartistPieChartData(data);
               new Chartist.Pie('#graph',
                 fs_chartData, {
                   labelInterpolationFnc: function(value) {
@@ -90,12 +90,12 @@ function getSolrData() {
           }
           break;
         case 'chartjs':
-          var ctx = document.getElementById("cChart");
+          var ctx = document.getElementById("cChart").getContext('2d');
+          fs_chartData = ChartJSChartData(data, getParameterByName('type'));
           switch (getParameterByName('type')) {
-            ChartJSChartData(data);
             case 'bar':
               var chartInstance = new Chart(ctx, {
-                type: 'line',
+                type: 'bar',
                 data: fs_chartData,
                 options: {
                   responsive: true
@@ -104,7 +104,7 @@ function getSolrData() {
               break;
             case 'doughnut':
               var chartInstance = new Chart(ctx, {
-                type: 'line',
+                type: 'doughnut',
                 data: fs_chartData,
                 options: {
                   responsive: true
@@ -122,7 +122,7 @@ function getSolrData() {
               break;
             case 'pie':
               var chartInstance = new Chart(ctx, {
-                type: 'line',
+                type: 'pie',
                 data: fs_chartData,
                 options: {
                   responsive: true
@@ -131,7 +131,7 @@ function getSolrData() {
               break;
             case 'polararea':
               var chartInstance = new Chart(ctx, {
-                type: 'line',
+                type: 'polararea',
                 data: fs_chartData,
                 options: {
                   responsive: true
@@ -143,11 +143,13 @@ function getSolrData() {
           }
           break;
         case 'cytoscape':
+          fs_chartData = CytoScapeChartData(data);
           switch (getParameterByName('type')) {
             default: break;
           }
           break;
         case 'dimplejs':
+          fs_chartData = dimplejsChartData(data);
           switch (getParameterByName('type')) {
             case 'area':
               break;
@@ -172,13 +174,14 @@ function getSolrData() {
           }
           break;
         case 'nvd3':
+          fs_chartData = nvd3ChartData(data);
           switch (getParameterByName('type')) {
             case 'bubble':
               break;
             case 'bullet':
               break;
-            case 'discrete bar'
-            break;
+            case 'discrete bar':
+              break;
             case 'expanded area':
               break;
             case 'grouped horizontal bar':
@@ -213,6 +216,7 @@ function getSolrData() {
           }
           break;
         case 'sigma':
+          fs_chartData = sigmajsChartData(data);
           switch (getParameterByName('type')) {
             case 'graph':
               break;
@@ -221,6 +225,7 @@ function getSolrData() {
           }
           break;
         case 'visjs':
+          fs_chartData = visjsChartData(data);
           switch (getParameterByName('type')) {
             case 'graph2d':
               break;

@@ -18,6 +18,7 @@ function ChartistBarChartData(data) {
         switch (x) {
           case '_version_':
           case 'id':
+          case 'day':
             // do nothing
             break;
           default:
@@ -37,6 +38,7 @@ function ChartistBarChartData(data) {
       switch (fs_chartData.labels[j]) {
         case '_version_':
         case 'id':
+        case 'day':
           // do nothing
           break;
         default:
@@ -55,6 +57,7 @@ function ChartistBarChartData(data) {
     fs_chartData.series.push(tmpArray);
 
   }
+
 
   return fs_chartData;
 }
