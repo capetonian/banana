@@ -143,17 +143,26 @@ function getSolrData() {
           }
           break;
         case 'cytoscape':
-          fs_chartData = CytoScapeChartData(data);
+          fs_chartData = CytoScapeChartData(data, getParameterByName(
+            'type'));
           switch (getParameterByName('type')) {
             default: break;
           }
           break;
         case 'dimplejs':
-          fs_chartData = dimplejsChartData(data);
+          var svg = dimple.newSvg("#graph", 400, 300);
+          fs_chartData = dimplejsChartData(data, getParameterByName(
+            'type'));
+
+          var chart = new dimple.chart(svg, fs_chartData);
+
           switch (getParameterByName('type')) {
             case 'area':
               break;
             case 'bar':
+              chart.addCategoryAxis("x", "Word");
+              chart.addMeasureAxis("y", "Awesomeness");
+              chart.addSeries(null, dimple.plot.bar);
               break;
             case 'bubble':
               break;
@@ -172,9 +181,12 @@ function getSolrData() {
             default:
               break;
           }
+
+          chart.draw();
+
           break;
         case 'nvd3':
-          fs_chartData = nvd3ChartData(data);
+          fs_chartData = nvd3ChartData(data, getParameterByName('type'));
           switch (getParameterByName('type')) {
             case 'bubble':
               break;
@@ -216,7 +228,7 @@ function getSolrData() {
           }
           break;
         case 'sigma':
-          fs_chartData = sigmajsChartData(data);
+          fs_chartData = sigmajsChartData(data, getParameterByName('type'));
           switch (getParameterByName('type')) {
             case 'graph':
               break;
@@ -225,7 +237,7 @@ function getSolrData() {
           }
           break;
         case 'visjs':
-          fs_chartData = visjsChartData(data);
+          fs_chartData = visjsChartData(data, getParameterByName('type'));
           switch (getParameterByName('type')) {
             case 'graph2d':
               break;
