@@ -1,12 +1,12 @@
 function nvd3ChartData(data, type) {
 
-  if (type === undefined) {
+  /*if (type === undefined) {
     type = 'line';
   }
 
   var fs_chartData = {
     labels: [],
-    datasets: [] /* data */
+    datasets: []
   };
 
   var fs_labels = [];
@@ -15,8 +15,6 @@ function nvd3ChartData(data, type) {
 
     //console.log(i);
 
-    /* $('#content').html($('#content').html() + "<BR>" + JSON.stringify(
-      data.response.docs[i], null, 2)); */
 
     if (i == 0) { // First row
       for (x in data.response.docs[0]) {
@@ -45,6 +43,8 @@ function nvd3ChartData(data, type) {
       //      if (data.response.docs[i]['day'][0] != 'primer') {
       //        lbl = data.response.docs[i]['day'][0];
       //      }
+
+      lbl = fs_chartData.labels[j];
 
       switch (fs_chartData.labels[j]) {
         case '_version_':
@@ -78,14 +78,14 @@ function nvd3ChartData(data, type) {
         borderWidth: 1,
         //hoverBackgroundColor: nextColor(tmpArray.length), //"rgba(255,99,132,0.4)",
         //hoverBorderColor: nextColor(tmpArray.length), //"rgba(255,99,132,1)"
-        /*options: {
 
-        }*/
       });
     }
   }
 
   console.log(fs_chartData);
+
+  */
 
   // register our custom symbols to nvd3
   // make sure your path is valid given any size because size scales if the chart scales.
@@ -112,7 +112,7 @@ function nvd3ChartData(data, type) {
     chart.yAxis.tickFormat(d3.format('.02f'));
     d3.select('#svgblock')
       //.datum(randomData(4, 40))
-      .datum(processData(fs_chartData))
+      .datum(processData(data))
       .call(chart);
     nv.utils.windowResize(chart.update);
     chart.dispatch.on('stateChange', function(e) {
@@ -168,25 +168,46 @@ function nextColor(arraySize) {
 //function randomData(groups, points) { //# groups,# points per group
 function processData(d) {
 
-  groups = 4;
+
+  console.log(d);
+
+  docs = d.response.docs;
+
+  var groups = [];
+
+  for (var j = 0; j < docs; j++) {
+    if (docs[j].indexOf("matching_strategy") > 0) {
+      groups.push(d.labels[j]);
+    }
+  }
+
   points = 100;
 
   // smiley and thin-x are our custom symbols!
   var data = [],
     shapes = ['thin-x', 'circle', 'cross', 'triangle-up', 'triangle-down',
       'diamond', 'square'
-    ],
-    random = d3.random.normal();
-  for (i = 0; i < groups; i++) {
+    ];
+
+  //var random = d3.random.normal();
+
+  var xCollection = [],
+    yCollection = [];
+
+
+
+  for (i = 0; i < groups.length; i++) {
     data.push({
-      key: 'Group ' + i,
+      key: groups[i],
       values: []
     });
+
     for (j = 0; j < points; j++) {
+
       data[i].values.push({
-        x: random(),
-        y: random(),
-        size: Math.round(Math.random() * 10) / 100,
+        x: xCollection,
+        y: yCollection,
+        size: 5,
         shape: shapes[j % shapes.length]
       });
     }
