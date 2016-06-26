@@ -5,6 +5,34 @@ $(document).ready(function() {
 
 });
 
+function ParseDate(str) {
+  return new Date(str);
+}
+
+function TryParseInt(str, defaultValue) {
+  var retValue = defaultValue;
+  if (str !== null) {
+    if (str.length > 0) {
+      if (!isNaN(str)) {
+        retValue = parseInt(str);
+      }
+    }
+  }
+  return retValue;
+}
+
+function TryParseFloat(str, defaultValue) {
+  var retValue = defaultValue;
+  if (str !== null) {
+    if (str.length > 0) {
+      if (!isNaN(str)) {
+        retValue = parseFloat(str);
+      }
+    }
+  }
+  return retValue;
+}
+
 var fs_chartData = {
   labels: [],
   series: []
@@ -150,7 +178,13 @@ function getSolrData() {
           }
           break;
         case 'dimplejs':
-          var svg = dimple.newSvg("#graph", 400, 300);
+          var svg = dimple.newSvg("#graph", 800, 600);
+
+
+          var fs_labels = dimplejsChartLabels(data.response.docs[0],
+            getParameterByName(
+              'type'));
+
           fs_chartData = dimplejsChartData(data, getParameterByName(
             'type'));
 
@@ -160,9 +194,13 @@ function getSolrData() {
             case 'area':
               break;
             case 'bar':
-              chart.addCategoryAxis("x", "Word");
-              chart.addMeasureAxis("y", "Awesomeness");
-              chart.addSeries(null, dimple.plot.bar);
+              chart.addCategoryAxis("y", _.reject(fs_labels, function(
+                item) {
+                return item === "day";
+              }));
+              var x = chart.addMeasureAxis("x", "day");
+              x.addOrderRule("day");
+              chart.addSeries(null, dimple.plot.line);
               break;
             case 'bubble':
               break;

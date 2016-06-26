@@ -1,12 +1,6 @@
-function dimplejsChartData(data, type) {
-
-  var docsToFlatten = data.response.docs;
-  var dataResponse = docsToFlatten;
-
+function dimplejsChartLabels(data, type) {
   var fs_labels = [];
-
-
-  for (x in docsToFlatten[0]) {
+  for (x in data) {
     switch (x) {
       case '_version_':
       case 'id':
@@ -18,9 +12,23 @@ function dimplejsChartData(data, type) {
         break;
     }
   }
+  return fs_labels;
+}
+
+function dimplejsChartData(data, type) {
+  var docsToFlatten = data.response.docs;
+  var dataResponse = docsToFlatten;
+
+  var fs_labels = dimplejsChartLabels(docsToFlatten[0]);
 
   for (i in docsToFlatten) {
+
     for (var j = 0; j < fs_labels.length; j++) {
+
+      //console.log(i);
+      //console.log(docsToFlatten[i]);
+      //console.log(docsToFlatten[i]['day']);
+
       if (docsToFlatten[i]['day'][0] != 'primer') {
         lbl = docsToFlatten[i]['day'][0];
       }
@@ -29,46 +37,42 @@ function dimplejsChartData(data, type) {
         case '_version_':
         case 'id':
           break;
-        case 'day':
+          //case 'day':
           // do nothing
-          break;
+          //break;
         default:
           if (docsToFlatten[i][fs_labels[j]] !== undefined) {
             if (docsToFlatten[i][fs_labels[j]] != 'primer') {
-              dataResponse[i][fs_labels[j]] = docsToFlatten[i][
+
+              var v = docsToFlatten[i][
                 fs_labels[j]
               ][0];
-              //tmpArray.push(dataResponse[i][fs_chartData.labels[j]][0]);
+
+              if (fs_labels[j] == "day") {
+                v = ParseDate(v);
+              }
+
+              dataResponse[i][fs_labels[j]] = TryParseFloat(v, v);
+
             }
           } else {
             dataResponse[i][fs_labels[j]] = 0;
-            //tmpArray.push(0); // TODO: Null? Undefined??
+
           }
           break;
       }
     }
   }
 
-  //console.log(docsToFlatten);
-
-  //_.object(_.pluck(data, 'name'), _.pluck(data, 'value'));
-
-  /*  for (var i in docsToFlatten) {
-
-      if (docsToFlatten[i].id !== 'primer') {
-
-        //console.log(docsToFlatten[i]);
-
-        for (var j in docsToFlatten[i]) {
-          dataResponse[i][j] = docsToFlatten[i][j][0];
-          //console.log(docsToFlatten[i][j][0]);
-        }
-        //dataResponse.push(_.object(docsToFlatten[i], docsToFlatten[i]));
-      }
-    }*/
+  dataResponse = _.reject(dataResponse, function(item) {
+    return item.id === "primer"; // or some complex logic
+  });
 
   console.log(dataResponse);
-  //console.log(dataResponse);
+
+
 
   return dataResponse;
+
+
 }
