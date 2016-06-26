@@ -249,6 +249,8 @@ function getSolrData() {
             case 'pie':
               break;
             case 'scatter':
+              console.log('nvd3 scatter');
+
               break;
             case 'simpleline':
             case 'simple line':
